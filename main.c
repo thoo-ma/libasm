@@ -12,6 +12,7 @@ extern char *  ft_strdup(const char *a);
 extern char *  ft_strcpy(const char *a, const char *b);
 extern int     ft_strcmp(const char *a, const char *b);
 extern ssize_t ft_read(int fd, void *buf, size_t count);
+extern ssize_t ft_write(int fd, const void *buf, size_t count);   
 
 void test_strlen()
 {
@@ -122,7 +123,53 @@ void test_read()
     test_read_error();
 }
 
-void test_write() {}
+void test_write_stdout()
+{
+    char * s = "foo\n";
+    ssize_t x, y;
+
+    x = write(1, s, 4);
+    y = ft_write(1, s, 4);
+    assert(x == y);
+
+    x = write(1, s, 2);
+    y = ft_write(1, s, 2);
+    assert(x == y);
+}
+
+void test_write_error()
+{
+    // testig only one error case: fd do not exist
+
+    char * s = "foo\n";
+    char * ft_strerror;
+    char * std_strerror;
+    int ft_errno;
+    int std_errno;
+    ssize_t x, y;
+
+    x = write(42, s, 2);
+    if (x < 0) {
+        std_errno = errno;
+        std_strerror = strerror(errno);
+    }
+
+    y = ft_write(42, s, 2);
+    if (y < 0) {
+        ft_errno = errno;
+        ft_strerror = strerror(errno);
+    }
+
+    assert(x == y);
+    assert(ft_errno == std_errno);
+    assert(strcmp(ft_strerror, std_strerror) == 0);
+}
+
+void test_write()
+{
+    test_write_stdout();
+    test_write_error();
+}
 
 int main() {
 

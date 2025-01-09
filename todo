@@ -3,10 +3,10 @@ done
 - strcmp
 - strcpy
 - read
+- write
 
 todo
 - strdup
-- write
 
 doc
 - https://www.felixcloutier.com/x86/
