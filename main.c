@@ -35,10 +35,18 @@ void test_strcpy()
 {
     char a[42] = "42";
     char b[42] = "42";
-    assert(strcmp(strcpy(a, ""), strcpy(b, "")) == 0);
+
+    assert(strcmp(strcpy(a, ""), ft_strcpy(b, "")) == 0);
     assert(strlen(a) == 0);
-    assert(strcmp(strcpy(a, "foo"), strcpy(b, "foo")) == 0);
+    assert(strlen(b) == 0);
+
+    assert(strcmp(strcpy(a, "foobar"), ft_strcpy(b, "foobar")) == 0);
+    assert(strlen(a) == 6);
+    assert(strlen(b) == 6);
+
+    assert(strcmp(strcpy(a, "foo\0bar"), ft_strcpy(b, "foo\0bar")) == 0);
     assert(strlen(a) == 3);
+    assert(strlen(b) == 3);
 }
 
 void test_strdup()

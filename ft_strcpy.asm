@@ -1,15 +1,14 @@
 section .text
-    global ft_strcpy
+  global ft_strcpy
 
 ft_strcpy:
-  cmp byte [rdi], 0
-  je .exit
-  mov rsi, [rdi]
-  inc rdi
+  mov rax, rdi        ; save destination pointer
+.copy:
+  mov dl, [rsi]
+  mov [rdi], dl
   inc rsi
-  jmp ft_strcpy
-
-.exit:
-  mov byte [rsi], 0
-  mov rax, rdi
+  inc rdi
+  test dl, dl         ; check for null terminator
+  jnz .copy
+  mov rax, rax        ; return destination pointer
   ret
