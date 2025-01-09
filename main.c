@@ -27,9 +27,12 @@ void test_strcmp()
 
 void test_strcpy()
 {
-    char a[42], b[42];
+    char a[42] = "42";
+    char b[42] = "42";
     assert(strcmp(strcpy(a, ""), strcpy(b, "")) == 0);
+    assert(strlen(a) == 0);
     assert(strcmp(strcpy(a, "foo"), strcpy(b, "foo")) == 0);
+    assert(strlen(a) == 3);
 }
 
 void test_strdup()
