@@ -1,9 +1,9 @@
 done
 - strlen
+- strcmp
 
 todo
 - strcpy
-- strcmp
 - strdup
 - read
 - write

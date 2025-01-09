@@ -46,22 +46,13 @@ void test_read() {}
 void test_write() {}
 
 int main() {
+
     // test_strlen();
     // test_strcmp();
     // test_strcpy();
     // test_strdup();
     // test_read();
     // test_write();
-    printf("%d\n", ft_strcmp("", ""));
-    printf("%d\n", ft_strcmp("", "foo"));
-    printf("%d\n", ft_strcmp("foo", ""));
-    printf("%d\n", ft_strcmp("foo", "foobar"));
-    printf("%d\n", ft_strcmp("foobar", "foo"));
 
-    printf("%d\n", strcmp("", ""));
-    printf("%d\n", strcmp("", "foo"));
-    printf("%d\n", strcmp("foo", ""));
-    printf("%d\n", strcmp("foo", "foobar"));
-    printf("%d\n", strcmp("foobar", "foo"));
     return 0;
 }

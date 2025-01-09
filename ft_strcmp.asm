@@ -15,9 +15,19 @@ ft_strcmp:
   jmp ft_strcmp
 
 .exit:
-  ; xor rax, rax    ; set rax to zero
-  mov rax, [rsi]
-  sub rax, [rdi]
-  ; mov rax, al
-  ; sub rax, bl
+  cmp al, bl
+  je .equal
+  jl .less
+  jg .greater
+
+.equal:
+  xor rax, rax    ; set rax to 0
+  ret
+
+.less:
+  mov rax, -1     ; set rax to -1
+  ret
+
+.greater:
+  mov rax, 1      ; set rax to 1
   ret
