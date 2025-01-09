@@ -2,10 +2,10 @@ done
 - strlen
 - strcmp
 - strcpy
+- read
 
 todo
 - strdup
-- read
 - write
 
 doc

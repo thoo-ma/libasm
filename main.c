@@ -2,11 +2,16 @@
 #include <string.h>
 #include <assert.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <fcntl.h>
+#include <errno.h>
 
-extern size_t ft_strlen(const char *a);
-extern char * ft_strdup(const char *a);
-extern char * ft_strcpy(const char *a, const char *b);
-extern int    ft_strcmp(const char *a, const char *b);
+extern size_t  ft_strlen(const char *a);
+extern char *  ft_strdup(const char *a);
+extern char *  ft_strcpy(const char *a, const char *b);
+extern int     ft_strcmp(const char *a, const char *b);
+extern ssize_t ft_read(int fd, void *buf, size_t count);
 
 void test_strlen()
 {
@@ -45,7 +50,78 @@ void test_strdup()
     free(b);
 }
 
-void test_read() {}
+void test_read_file(char * file)
+{
+    char a[42];
+    char b[42];
+
+    int fd = open(file, O_RDONLY);
+    if (fd < 0) {
+        perror("open");
+        return;
+    }
+
+    ssize_t x = read(fd, a, 42);
+
+    if (lseek(fd, 0, SEEK_SET) < 0) {
+        perror("lseek");
+        close(fd);
+        return;
+    }
+
+    ssize_t y = ft_read(fd, b, 42);
+
+    assert(x == y);
+    assert(strcmp(a, b) == 0);
+}
+
+void test_read_stdin()
+{
+    char a[42];
+    char b[42];
+    ssize_t x = read(0, a, 42);
+    ssize_t y = ft_read(0, b, 42);
+    assert(x == y);
+}
+
+void test_read_error()
+{
+    // testig only one error case: fd do not exist
+
+    char a[42];
+    char b[42];
+
+    int ft_errno;
+    int std_errno;
+
+    char * ft_strerror;
+    char * std_strerror;
+
+    ssize_t x = read(42, a, 42);
+    if (x < 0) {
+        std_errno = errno;
+        std_strerror = strerror(errno);
+    }
+
+    ssize_t y = ft_read(42, b, 42);
+    if (y < 0) {
+        ft_errno = errno;
+        ft_strerror = strerror(errno);
+    }
+
+    assert(x == y);
+    assert(ft_errno == std_errno);
+    assert(strcmp(ft_strerror, std_strerror) == 0);
+}
+
+void test_read()
+{
+    test_read_file("input/empty.txt");
+    test_read_file("input/lorem.txt");
+    test_read_stdin();
+    test_read_error();
+}
+
 void test_write() {}
 
 int main() {

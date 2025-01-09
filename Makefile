@@ -3,7 +3,7 @@ CC = gcc
 ASM_FLAGS = -f elf64
 CC_FLAGS = -c -Wall
 
-ASM_FILES = ft_strlen.asm ft_strcmp.asm ft_strcpy.asm ft_strdup.asm
+ASM_FILES = ft_strlen.asm ft_strcmp.asm ft_strcpy.asm ft_strdup.asm ft_read.asm
 ASM_OBJS = $(ASM_FILES:.asm=.o)
 C_OBJ = main.o
 LIBRARY = libft.a
