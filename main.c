@@ -122,12 +122,14 @@ void test_read_error()
 
     ssize_t x = read(42, a, 42);
     if (x < 0) {
+        assert(x == -1);
         std_errno = errno;
         std_strerror = strerror(errno);
     }
 
     ssize_t y = ft_read(42, b, 42);
     if (y < 0) {
+        assert(y == -1);
         ft_errno = errno;
         ft_strerror = strerror(errno);
     }
@@ -166,12 +168,14 @@ void test_write_error()
 
     x = write(42, s, 2);
     if (x < 0) {
+        assert(x == -1);
         std_errno = errno;
         std_strerror = strerror(errno);
     }
 
     y = ft_write(42, s, 2);
     if (y < 0) {
+        assert(y == -1);
         ft_errno = errno;
         ft_strerror = strerror(errno);
     }
