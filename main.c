@@ -84,7 +84,8 @@ void test_read_file(char * file)
         return;
     }
 
-    ssize_t x = read(fd, a, 42);
+    ssize_t x = read(fd, a, sizeof(a) - 1);
+    a[sizeof(a) - 1] = '\0';
 
     if (lseek(fd, 0, SEEK_SET) < 0) {
         perror("lseek");
@@ -92,10 +93,12 @@ void test_read_file(char * file)
         return;
     }
 
-    ssize_t y = ft_read(fd, b, 42);
+    ssize_t y = ft_read(fd, b, sizeof(b) - 1);
+    b[sizeof(b) - 1] = '\0';
 
     assert(x == y);
     assert(strcmp(a, b) == 0);
+    close(fd);
 }
 
 void test_read_stdin()
@@ -192,11 +195,11 @@ void test_write()
 }
 
 int main() {
+    test_read();
+    test_write();
     test_strlen();
     test_strcmp();
     test_strcpy();
     test_strdup();
-    test_read();
-    test_write();
     return 0;
 }
