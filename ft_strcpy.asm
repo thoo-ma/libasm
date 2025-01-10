@@ -3,6 +3,7 @@ section .text
 
 ft_strcpy:
   mov rax, rdi        ; save destination pointer
+
 .copy:
   mov dl, [rsi]
   mov [rdi], dl
