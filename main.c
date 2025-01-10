@@ -148,15 +148,9 @@ void test_read()
 void test_write_stdout()
 {
     char * s = "foo\n";
-    ssize_t x, y;
-
-    x = write(1, s, 4);
-    y = ft_write(1, s, 4);
-    assert(x == y);
-
-    x = write(1, s, 2);
-    y = ft_write(1, s, 2);
-    assert(x == y);
+    assert(write(1, s, 4) == ft_write(1, s, 4));
+    assert(write(1, s, 0) == ft_write(1, s, 0));
+    assert(write(1, s, 2) == ft_write(1, s, 2));
 }
 
 void test_write_error()
