@@ -13,7 +13,7 @@ extern char *  ft_strdup(const char *a) __attribute__((nonnull(1)));
 extern char *  ft_strcpy(const char *a, const char *b) __attribute__((nonnull(1, 2)));
 extern int     ft_strcmp(const char *a, const char *b) __attribute__((nonnull(1, 2)));
 extern ssize_t ft_read(int fd, void *buf, size_t count);
-extern ssize_t ft_write(int fd, const void *buf, size_t count);   
+extern ssize_t ft_write(int fd, const void *buf, size_t count);
 
 void test_strlen()
 {
