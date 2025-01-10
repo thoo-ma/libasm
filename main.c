@@ -52,12 +52,25 @@ void test_strcpy()
 
 void test_strdup()
 {
-    char * s = "";
+    char * s = "foobar";
     char * a = strdup(s);
     char * b = ft_strdup(s);
-    assert(a == b);
+
+    assert(strcmp(a, s) == 0);
+    assert(strcmp(b, s) == 0);
+
     free(a);
     free(b);
+
+    char * x = "";
+    char * c = strdup(x);
+    char * d = ft_strdup(x);
+
+    assert(strcmp(c, x) == 0);
+    assert(strcmp(d, x) == 0);
+
+    free(c);
+    free(d);
 }
 
 void test_read_file(char * file)
@@ -181,13 +194,11 @@ void test_write()
 }
 
 int main() {
-
-    // test_strlen();
-    // test_strcmp();
-    // test_strcpy();
-    // test_strdup();
-    // test_read();
-    // test_write();
-
+    test_strlen();
+    test_strcmp();
+    test_strcpy();
+    test_strdup();
+    test_read();
+    test_write();
     return 0;
 }

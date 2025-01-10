@@ -2,11 +2,12 @@ done
 - strlen
 - strcmp
 - strcpy
+- strdup
 - read
 - write
 
 todo
-- strdup
+- clang > gcc
 
 doc
 - https://www.felixcloutier.com/x86/
