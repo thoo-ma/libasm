@@ -18,7 +18,7 @@ ft_strdup:
   call ft_strcpy        ; copy from rsi to rdi
   ret
 
-.malloc_failed
+.malloc_failed:
   pop rdi               ; restore rdi
   xor rax, rax          ; return NULL
   ret
