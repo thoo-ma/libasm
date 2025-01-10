@@ -1,35 +1,42 @@
-ASM = nasm
-CC = gcc
-ASM_FLAGS = -f elf64
-CC_FLAGS = -c -Wall
+AS = nasm
+ASFLAGS = -f elf64
 
-ASM_FILES = ft_strlen.asm ft_strcmp.asm ft_strcpy.asm ft_strdup.asm ft_read.asm ft_write.asm
-ASM_OBJS = $(ASM_FILES:.asm=.o)
-C_OBJ = main.o
-LIBRARY = libft.a
+CC = clang
+CFLAGS = -Wall -Wextra -Werror
 
-NAME = a.out
+ASSRCS = ft_strlen.asm \
+		ft_strcmp.asm \
+		ft_strcpy.asm \
+		ft_strdup.asm \
+		ft_read.asm \
+		ft_write.asm
 
-all: $(NAME)
+ASOBJS = $(addsuffix .o, $(basename $(ASSRCS)))
 
-$(NAME): $(LIBRARY) $(C_OBJ)
-	$(CC) -o $(NAME) $(C_OBJ) $(LIBRARY)
+ARFLAGS = rcs
 
-$(LIBRARY): $(ASM_OBJS)
-	ar rcs $(LIBRARY) $(ASM_OBJS)
+NAME = libasm.a
+
+all: test
+
+test: $(NAME) main.c
+	$(CC) $(CFLAGS) main.c -L. -lasm
+
+$(NAME): $(ASOBJS)
+	$(AR) $(ARFLAGS) $(NAME) $^
 
 %.o: %.asm
-	$(ASM) $(ASM_FLAGS) -o $@ $<
+	$(AS) $(ASFLAGS) -o $@ $<
 
-$(C_OBJ): main.c
-	$(CC) $(CC_FLAGS) main.c
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(LIBRARY) $(ASM_OBJS) $(C_OBJ)
+	$(RM) $(NAME) $(ASOBJS)
 
 fclean: clean
-	rm -f $(NAME)
+	$(RM) a.out
 
-re: clean all
+re: fclean all
 
-.PHONY: all clean
+.PHONY: all clean fclean re
