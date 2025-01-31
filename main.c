@@ -75,8 +75,8 @@ void test_strdup()
 
 void test_read_file(char * file)
 {
-    char a[42];
-    char b[42];
+    char a[42] = "";
+    char b[42] = "";
 
     int fd = open(file, O_RDONLY);
     if (fd < 0) {
